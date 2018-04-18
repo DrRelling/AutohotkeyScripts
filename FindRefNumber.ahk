@@ -3,7 +3,7 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-^!1::
+<^>!1::
     oCB := ClipboardAll  ; save clipboard contents
     ClipBoard :=
     Send, ^c
@@ -11,9 +11,9 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
     number := RegExReplace(clipboard, "\s", "")
     ClipBoard := oCB ; restore clipboard contents
     FindRefNumber("https://cbre.service-now.com", number)
-return
+Return
 
-^!2::
+<^>!2::
     oCB := ClipboardAll  ; save clipboard contents
     ClipBoard :=
     Send, ^c
@@ -61,16 +61,17 @@ FindRefNumber(env, number)
     SetTitleMatchMode 2
     ; Uncomment both to try them in order, or just one to only try that one
     ; Use Chrome
+    /*
     IfWinExist Google Chrome
         WinActivate, Google Chrome
+    */
     ; Use Firefox
-    /*
     IfWinExist Firefox
         WinActivate, Firefox
-    */
     SendInput ^t
     SendInput %link%
     SendInput {Enter}
+    Return
 }
 
 guiclose:
